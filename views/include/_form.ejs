@@ -1,0 +1,44 @@
+ <!-- form handling -->
+ <form action="/api/users" method="POST" id="add_user">
+    <div class="new_user">
+        <div class="form-group">
+            <label for="firstname" class="text-light">Firstname</label>
+            <input type="hidden" name="id" value="">
+            <input type="text" name="firstname" value="" placeholder="exemple">
+        </div>
+        <div class="form-group">
+            <label for="laststname" class="text-light">Lastname</label>
+            <input type="hidden" name="id" value="">
+            <input type="text" name="lastname" value="" placeholder="exemple">
+        </div>
+        <div class="form-group">
+            <label for="Email" class="text-light">Email</label>
+            <input type="text" name="email" value="" placeholder="example@gmail.com">
+        </div>
+        <div class="form-group">
+            <label for="gender" class="text-light">Status</label>
+            <div class="radio inline">
+                <input type="radio" id="radio-4" name="status" value="Active" >
+                <label for="radio-4" class="radio-label">Active</label>
+            </div>
+            <div class="radio inline">
+                <input type="radio" id="radio-5" name="status" value="Inactive" >
+                <label for="radio-5" class="radio-label">Inactive</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="score" class="text-light">Score</label>
+            <input type="hidden" name="id" value="">
+            <input type="text" name="score" value="" placeholder="10">
+        </div>
+        <div class="form-group">
+            <label for="trophet" class="text-light">Trophet</label>
+            <input type="hidden" name="id" value="">
+            <input type="text" name="trophet" value="" placeholder="trophet">
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn text-dark update">Save</button>
+        </div>
+
+    </div>

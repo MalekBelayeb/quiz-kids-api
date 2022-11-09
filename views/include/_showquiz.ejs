@@ -1,0 +1,19 @@
+<% for(var i = 0; i < quiz.length; i++) { %>
+    <tr>
+        <td><%= i + 1 %></td>
+        <td><%= quiz[i].quiz %></td>
+        <td><%= quiz[i].category %></td>
+        <td><%= quiz[i].answer1 %></td>
+        <td><%= quiz[i].answer2 %></td>
+        <td><%= quiz[i].answer3 %></td>
+        <td><%= quiz[i].answer4 %></td>
+        <td>
+            <a href="/update-quiz?id=<%= quiz[i]._id%>" class="btn border-shadow update">
+                <span class="text-gradient"><i class="fas fa-pencil-alt"></i></span>
+            </a>
+            <a class="btn border-shadow delete" data-id=<%= quiz[i]._id%> >
+                <span class="text-gradient"><i class="fas fa-times"></i></span>
+            </a>
+        </td>
+    </tr>
+    <% } %>
