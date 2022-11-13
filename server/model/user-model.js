@@ -23,8 +23,9 @@ var schema = new mongoose.Schema({
     score : Number,
     trophe: String
 })
-const Userdb = mongoose.model('User', schema);
 
-module.exports = Userdb;
+const User = mongoose.model('User', schema);
+
+module.exports = User;
 
 

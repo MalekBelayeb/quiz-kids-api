@@ -1,4 +1,4 @@
-var Userdb = require('../model/model');
+var Userdb = require('../model/user-model');
 var bcrypt = require('bcrypt');
 
 // create and save new user
@@ -9,7 +9,7 @@ exports.create = async (req, res) => {
         return;
     }
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hashSync(req.body.password,salt)
+    const hashedPassword = await bcrypt.hashSync(req.body.password, salt)
 
     const user = new Userdb({
         firstname: req.body.firstname,
@@ -19,15 +19,16 @@ exports.create = async (req, res) => {
         status: req.body.status,
         score: req.body.score,
         trophe: req.body.trophe,
-        profileimage:req.files.photo[0].filename
+        //profileimage: req.files.photo[0].filename
     })
 
     // save user in the database
     user
         .save()
-        .then(data => {
-            //res.send(data)
-            res.redirect('/add-user');
+        .then(user => {
+
+            res.status(200).send({success:true,message:"",user})
+        
         })
         .catch(err => {
             res.status(500).send({
@@ -89,7 +90,7 @@ exports.update = (req, res) => {
             res.status(500).send({ message: "Error Update user information" })
         })
 
-        
+
 }
 
 
@@ -122,26 +123,24 @@ exports.login = async (req, res) => {
     try {
 
         var user = await Userdb.findOne({ email })
+
         if (!user) {
-            
-            //JWT: json web token
-            //bcrypt 
-            
-            res.status(404).send({ message: "Invalid credential" })
-            
+
+            res.status(404).send({ success: false, message: "Invalid credential" })
+
         } else {
-            
+
             if (await bcrypt.compareSync(password,user.password)) {
-                res.status(200).send({ message: "User connected,", user })
+                res.status(200).send({ success: true, message: "User connected,", user:user._id })
             } else {
-                res.status(404).send({ message: "Invalid credential" })
+                res.status(404).send({ success: false, message: "Invalid credential" })
             }
 
         }
 
     } catch (e) {
         console.log(e)
-        res.status(404).send({message: "Something wrong happen"})
+        res.status(404).send({ message: "Something wrong happen" })
     }
 
 }

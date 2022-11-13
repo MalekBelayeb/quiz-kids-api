@@ -16,9 +16,11 @@ var storage = multer.diskStorage({
     cb(null, './uploads');
   },
   filename: function (req, file, cb) {
+    var filename = file.fieldname + '-' + Date.now() + path.extname(file.originalname)
+    req.body.image = filename;
     cb(
       null,
-      file.fieldname + '-' + Date.now() + path.extname(file.originalname),
+      filename,
     );
   },
   fileFilter: function (req, file, cb) {
@@ -33,7 +35,7 @@ var storage = multer.diskStorage({
 /* ---------------------------------- CONST --------------------------------- */
 const upload = multer({ storage: storage });
 const fileUpload = upload.fields([
-  { name: 'photo', maxCount: 1 }
+  { name: 'image', maxCount: 1 }
 ]);
 
 // Multer config

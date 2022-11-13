@@ -1,4 +1,4 @@
-var quizdb = require('../model/quizmodel');
+var quizdb = require('../model/quiz-model');
 
 // create and save new quiz
 exports.create = (req,res)=>{
