@@ -2,7 +2,7 @@ var Userdb = require('../model/user-model');
 var bcrypt = require('bcrypt');
 
 // create and save new user
-exports.create = async (req, res) => {
+exports.create = async(req, res) => {
     // validate request
     if (!req.body) {
         res.status(400).send({ message: "Content can not be emtpy!" });
@@ -27,8 +27,8 @@ exports.create = async (req, res) => {
         .save()
         .then(user => {
 
-            res.status(200).send({success:true,message:"",user})
-        
+            res.status(200).send({ success: true, message: "", user })
+
         })
         .catch(err => {
             res.status(500).send({
@@ -54,7 +54,7 @@ exports.find = (req, res) => {
 exports.findById = (req, res) => {
     const id = req.params.id;
 
-    Userdb.findById(id)
+    Userdb.findById(id).populate('badges')
         .then(data => {
             if (!data) {
                 res.status(404).send({ message: "Not found user with id " + id })
@@ -116,7 +116,7 @@ exports.delete = (req, res) => {
 }
 
 
-exports.login = async (req, res) => {
+exports.login = async(req, res) => {
 
     const { email, password } = req.body
 
@@ -130,8 +130,8 @@ exports.login = async (req, res) => {
 
         } else {
 
-            if (await bcrypt.compareSync(password,user.password)) {
-                res.status(200).send({ success: true, message: "User connected,", user:user._id })
+            if (await bcrypt.compareSync(password, user.password)) {
+                res.status(200).send({ success: true, message: "User connected,", user: user._id })
             } else {
                 res.status(404).send({ success: false, message: "Invalid credential" })
             }

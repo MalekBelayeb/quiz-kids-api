@@ -7,6 +7,11 @@ var schema = new mongoose.Schema({
         required: true
     },
 
+    score: {
+        type: Number,
+        default: 0
+    },
+
     isCorrect: {
         type: Boolean,
         default: false

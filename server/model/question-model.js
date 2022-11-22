@@ -6,11 +6,13 @@ var schema = new mongoose.Schema({
         type: String,
         required: true
     },
+
     answers: { type: [mongoose.Schema.Types.ObjectId], ref: 'Answer' },
+
     image: {
 
         type: String,
-        required: true,
+        required: false,
 
     },
 

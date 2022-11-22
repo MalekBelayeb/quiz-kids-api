@@ -1,31 +1,37 @@
 const mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
-    firstname : {
-        type : String,
+    firstname: {
+        type: String,
         required: true
     },
-    lastname : {
-        type : String,
+    lastname: {
+        type: String,
         required: true
     },
-    email : {
+    email: {
         type: String,
         required: true,
         unique: true
     },
-    profileimage : {
-        type : String,
+    profileimage: {
+        type: String,
         required: false,
     },
+    globalScore: {
+        type: Number,
+        default: 0,
+    },
+    badges: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Badge',
+        default: 0,
+    },
     password: String,
-    status : String,
-    score : Number,
-    trophe: String
+    status: String,
+
 })
 
 const User = mongoose.model('User', schema);
 
 module.exports = User;
-
-
