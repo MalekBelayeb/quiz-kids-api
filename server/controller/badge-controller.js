@@ -1,6 +1,6 @@
 var Badge = require('../model/badge-model');
 
-exports.find = (req, res) => {
+exports.find = async(req, res) => {
 
     Badge.find()
         .then(badges => {

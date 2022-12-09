@@ -10,6 +10,10 @@ var schema = new mongoose.Schema({
         type: String,
         required: true
     },
+    requiredPoints: {
+        type: Number,
+        required: true,
+    }
 })
 
 

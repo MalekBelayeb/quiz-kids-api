@@ -38,6 +38,7 @@ app.use('/api', require('./server/routes/quiz-route'))
 app.use('/api', require('./server/routes/question-route'))
 app.use('/api', require('./server/routes/answer-route'))
 app.use('/api', require('./server/routes/badge-route'))
+app.use('/api', require('./server/routes/quiz-attempt-route'))
 
 
 app.listen(PORT, () => { console.log(`Server is running on http://localhost:${PORT}`) });

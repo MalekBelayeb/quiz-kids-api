@@ -27,10 +27,11 @@ exports.create = async(req, res) => {
         .save()
         .then(user => {
 
-            res.status(200).send({ success: true, message: "", user })
+            res.status(200).send({ success: true, message: "", user: user._id })
 
         })
         .catch(err => {
+
             res.status(500).send({
                 message: err.message || "Some error occurred while creating a create operation"
             });

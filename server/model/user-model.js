@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
+
     firstname: {
         type: String,
         required: true
@@ -22,10 +23,13 @@ var schema = new mongoose.Schema({
         type: Number,
         default: 0,
     },
+    playedQuiz: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'Quiz',
+    },
     badges: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: 'Badge',
-        default: 0,
     },
     password: String,
     status: String,

@@ -42,6 +42,6 @@ var schema = new mongoose.Schema({
     },
 
 })
-const Quiz = new mongoose.model('Quiz', schema);
 
+const Quiz = new mongoose.model('Quiz', schema);
 module.exports = Quiz;

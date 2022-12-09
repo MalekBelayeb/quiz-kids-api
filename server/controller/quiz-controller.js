@@ -48,12 +48,11 @@ exports.findById = (req, res) => {
             res.status(500).send({ message: "Error retrieving question with id " + id })
         })
 
-
 }
 
 exports.findByCatId = (req, res) => {
 
-    quizdb.find({ category: req.params.idCat }).populate({ path: 'questions', populate: { path: 'answers' } })
+    quizdb.find({ category: req.params.idCat }).populate({ path: 'questions', populate: { path: 'answers' } }).populate('category')
         .then(data => {
 
             if (!data) {
@@ -75,9 +74,10 @@ exports.findByCatId = (req, res) => {
 }
 
 exports.find = (req, res) => {
-    quizdb.find().populate({ path: 'questions', populate: { path: 'answers' } })
+
+    quizdb.find().populate({ path: 'questions', populate: { path: 'answers' } }).populate('category')
         .then(quiz => {
-            res.send(quiz)
+            res.send({ quiz })
         })
         .catch(err => {
             res.status(500).send({ message: err.message || "Error Occurred while retriving quiz information" })
