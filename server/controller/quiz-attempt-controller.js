@@ -19,12 +19,17 @@ exports.addQuizAttempt = async(req, res) => {
             user: userId
         })
 
-        let newQuizAttempt = await quizAttempt.save()
+        let user = await User.findById(userId)
 
-        res.status(200).send(newQuizAttempt)
+        let alreadyPlayed = user.playedQuiz.includes(quizId)
+        
+        let newQuizAttempt = await quizAttempt.save()
+        let result = { id:newQuizAttempt.id,quiz:newQuizAttempt.quiz,user:newQuizAttempt.user,alreadyPlayed }
+        console.log(result)
+        res.status(200).json(result)
 
     } catch (e) {
-
+        console.log(e)
     }
 
 }
@@ -79,11 +84,11 @@ exports.finishQuiz = async(req, res) => {
         let { quizAttemptId } = req.body
 
         const quizAttempt = await QuizAttempt.findById(quizAttemptId).populate({ path: 'questions', populate: { path: 'userAnswer' } })
-
         if (!quizAttempt) return res.status(404).end()
 
         const user = await User.findById(quizAttempt.user)
         if (!user) return res.status(404).end()
+        console.log(quizAttempt)
 
         if (user.playedQuiz.includes(quizAttempt.quiz)) return res.status(404).send("Quiz already played")
 
@@ -103,6 +108,7 @@ exports.finishQuiz = async(req, res) => {
 
         user.badges = gainedBadges
         await user.save()
+
         res.status(200).send({ success: true, message: quizAttempt })
 
     } catch (e) {
